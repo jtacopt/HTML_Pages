@@ -1,0 +1,38 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Mouse Over</title>
+    <style>
+        .menu {
+            width: 200px;
+            height: 40px;
+            background-color: lightgray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .menu:hover {
+            background-color: gray;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="menu" onmouseover="document.getElementById('text-label').innerHTML = 'Opção 1'"
+     onclick="document.getElementById('text-label').innerHTML = 'Opção 1'">Opção 1
+</div>
+<br/>
+<div class="menu" onmouseover="document.getElementById('text-label').innerHTML = 'Opção 2'"
+     onclick="document.getElementById('text-label').innerHTML = 'Opção 2'">Opção 2
+</div>
+<br/>
+<div class="menu" onmouseover="document.getElementById('text-label').innerHTML = 'Opção 3'"
+     onclick="document.getElementById('text-label').innerHTML = 'Opção 3'">Opção 3
+</div>
+<br/>
+<br/>
+<label id="text-label">Selecione uma opção</label>
+</body>
+</html>
