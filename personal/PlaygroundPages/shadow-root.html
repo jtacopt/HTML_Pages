@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shadow-Dom</title>
+</head>
+<body>
+<section>
+    <login-form></login-form>
+</section>
+<template id="login-form-template">
+    <style>
+        :host {
+            display: block;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+        }
+        input {
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border-radius: 0.25rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+        }
+        input[type="submit"] {
+            background-color: royalblue;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+        }
+
+    </style>
+    <form>
+        <h3>Login</h3>
+        <label for="username">Nome de usuário:</label>
+        <input type="text" id="username" name="username">
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password">
+        <input type="submit" value="Entrar">
+    </form>
+</template>
+
+<script>
+    class LoginForm extends HTMLElement {
+        constructor() {
+            super();
+
+            this._shadowRoot = this.attachShadow({ mode: "open" });
+            this._shadowRoot.appendChild(
+                document.getElementById("login-form-template").content.cloneNode(true)
+            );
+
+            this._form = this._shadowRoot.querySelector("form");
+            this._form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                console.log("Formulário enviado!");
+            });
+        }
+    }
+
+    customElements.define("login-form", LoginForm);
+</script>
+</body>
+</html>
