@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Upload de Imagem</title>
+  <style>
+    #container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px;
+    }
+    #photo {
+      width: 40%;
+      height: 300px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-right: 20px;
+    }
+    #selected-photo {
+      max-width: 100%;
+      max-height: 100%;
+      display: none;
+    }
+    #form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-left: 20px;
+    }
+    #photo-input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #eee;
+      margin-bottom: 10px;
+    }
+    #submit-button {
+      padding: 10px 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #eee;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div id="container">
+  <div id="photo">
+    <img id="selected-photo">
+  </div>
+  <div id="form">
+    <form action="#" method="post" enctype="multipart/form-data">
+      <input type="file" id="photo-input" name="photo">
+      <input type="submit" id="submit-button" value="Upload">
+    </form>
+  </div>
+</div>
+<script>
+  const photoInput = document.getElementById('photo-input');
+  const selectedPhoto = document.getElementById('selected-photo');
+
+  photoInput.addEventListener('change', function() {
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      selectedPhoto.src = event.target.result;
+      selectedPhoto.style.display = 'block';
+    };
+    reader.readAsDataURL(photoInput.files[0]);
+  });
+</script>
+</body>
+</html>

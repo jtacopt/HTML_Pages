@@ -32,15 +32,19 @@
             border-radius: 0.25rem;
             cursor: pointer;
         }
+        input[type="submit"]:disabled {
+            background-color: gray;
+            cursor: not-allowed;
+        }
 
     </style>
     <form>
         <h3>Login</h3>
         <label for="username">Nome de usuário:</label>
-        <input type="text" id="username" name="username">
+        <input type="text" id="username" name="username" required>
         <label for="password">Senha:</label>
-        <input type="password" id="password" name="password">
-        <input type="submit" value="Entrar">
+        <input type="password" id="password" name="password" required>
+        <input type="submit" value="Entrar" disabled>
     </form>
 </template>
 
@@ -57,7 +61,29 @@
             this._form = this._shadowRoot.querySelector("form");
             this._form.addEventListener("submit", (e) => {
                 e.preventDefault();
-                console.log("Formulário enviado!");
+                const username = this._form.querySelector("#username").value;
+                const password = this._form.querySelector("#password").value;
+
+                if (username === "user" && password === "pass") {
+                    this._shadowRoot.querySelector("h3").textContent = "Logado";
+                } else {
+                    alert("Credenciais incorretas");
+                }
+            });
+
+            const inputs = this._form.querySelectorAll("input");
+            inputs.forEach((input) => {
+                input.addEventListener("input", () => {
+                    const username = this._form.querySelector("#username").value;
+                    const password = this._form.querySelector("#password").value;
+                    const submitButton = this._form.querySelector("input[type='submit']");
+
+                    if (username !== "" && password !== "") {
+                        submitButton.disabled = false;
+                    } else {
+                        submitButton.disabled = true;
+                    }
+                });
             });
         }
     }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exemplo de Shadow DOM aninhado com forms</title>
+</head>
+<body>
+<div id="shadow1">
+</div>
+<script>
+    const main = document.getElementById("shadow1");
+
+    // cria o primeiro shadow root
+    const shadow = main.attachShadow({mode: "open"});
+    const input1 = document.createElement("input");
+    input1.setAttribute("type", "text");
+    input1.setAttribute("placeholder", "Shadow DOM 1");
+    shadow.appendChild(input1);
+
+
+    // cria um segundo shadow root
+    const div2 = document.createElement("div");
+    div2.setAttribute("id","shadow2");
+    shadow.appendChild(div2);
+    const shadow2 = div2.attachShadow({mode: "open"});
+
+    const input2 = document.createElement("input");
+    input2.setAttribute("type", "text");
+    input2.setAttribute("placeholder", "Shadow DOM 2");
+    shadow2.appendChild(input2)
+    const div3 = document.createElement("div");
+    div3.setAttribute("id","shadow3");
+    shadow2.appendChild(div3)
+
+    const shadow3 = div3.attachShadow({mode: "open"});
+    const input3 = document.createElement("input");
+    input3.setAttribute("type", "text");
+    input3.setAttribute("placeholder", "Shadow DOM 3");
+    shadow3.appendChild(input3)
+
+
+</script>
+</body>
+</html>
